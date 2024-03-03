@@ -1,6 +1,8 @@
 const express = require('express');
 const indexRouter = require('./routes/index');
 const mongoose = require('mongoose');
+const User = require('./models/user');
+const Message = require('./models/message');
 require('dotenv').config();
 
 const app = express();
