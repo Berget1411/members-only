@@ -3,7 +3,11 @@
     <a href="/">Only Members</a>
   </div>
   <div>
+    <% if (!currentUser) { %>
     <a href="/sign-up">Sign up</a>
     <a href="/log-in">Log in</a>
+    <% } else { %>
+    <a href="/log-out">Log out</a>
+    <% } %>
   </div>
 </nav>

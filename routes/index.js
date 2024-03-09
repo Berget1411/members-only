@@ -9,7 +9,6 @@ router.get('/', async function (req, res, next) {
   res.render('index', {
     messages: messages,
   });
-  console.log(req.body);
 });
 
 module.exports = router;

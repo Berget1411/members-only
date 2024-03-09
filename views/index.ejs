@@ -4,10 +4,12 @@
   <body>
     <%- include('./partials/nav.ejs') %> <% if (currentUser) { %>
     <h1>Welcome back <%= currentUser.username %></h1>
+    <p>Log in to post a message as well as to see who posted.</p>
     <% } else { %>
     <h1>Messages</h1>
+    <p>All messages posted by our members</p>
     <% } %>
-    <p>Log in to post a message as well as to see who posted.</p>
+
     <section>
       <% messages.forEach((message) => { %>
       <h2><%= message.title %></h2>

@@ -65,3 +65,11 @@ app.use(indexRouter);
 app.use('/sign-up', signUpRouter);
 
 app.use('/log-in', logInRouter);
+app.get('/log-out', (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/');
+  });
+});
