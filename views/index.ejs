@@ -2,6 +2,21 @@
 <html lang="en">
   <%- include('./partials/head.ejs') %>
   <body>
-    <h1>Members only</h1>
+    <%- include('./partials/nav.ejs') %> <% if (currentUser) { %>
+    <h1>Welcome back <%= currentUser.username %></h1>
+    <% } else { %>
+    <h1>Messages</h1>
+    <% } %>
+    <p>Log in to post a message as well as to see who posted.</p>
+    <section>
+      <% messages.forEach((message) => { %>
+      <h2><%= message.title %></h2>
+      <p><%= message.description %></p>
+      <div>
+        <p><%= message.author %></p>
+        <p><%= message.date %></p>
+      </div>
+      <% }); %>
+    </section>
   </body>
 </html>

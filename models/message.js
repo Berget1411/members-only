@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
 
 const Schema = mongoose.Schema;
 
@@ -14,12 +15,12 @@ const messageSchema = new Schema({
     required: true,
   },
   date: {
-    type: Date,
-    default: () => Date.now(),
+    type: String,
+    default: () => moment().format('D-MM-YYYY'),
   },
 
   author: {
-    type: mongoose.SchemaTypes.ObjectId,
+    type: String,
     required: true,
   },
 });
