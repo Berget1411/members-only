@@ -7,26 +7,32 @@
     <form action="" method="POST">
       <input
         name="f_name"
-        placeholder="First Name"
+        placeholder="First Name*"
         type="text"
         value="<%= user.f_name %>"
       />
       <input
         name="l_name"
-        placeholder="Last Name"
+        placeholder="Last Name*"
         type="text"
         value="<%= user.l_name%>"
       />
       <input
         name="username"
-        placeholder="Username"
+        placeholder="Username*"
         type="text"
         value="<%= user.username%>"
       />
-      <input name="password" placeholder="Password" type="password" />
+      <input name="password" placeholder="Password*" type="password" />
       <input
         name="re_password"
-        placeholder="Confirm Password"
+        placeholder="Confirm Password*"
+        type="password"
+      />
+
+      <input
+        name="admin_key"
+        placeholder="Admin Key(optional)"
         type="password"
       />
       <button>Sign Up</button>

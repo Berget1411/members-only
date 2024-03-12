@@ -2,6 +2,7 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 const asyncHandler = require('express-async-handler');
+require('dotenv').config();
 
 const sign_up_get = (req, res) =>
   res.render('sign-up', { errors: false, user: false });
@@ -39,6 +40,7 @@ const sign_up_post = [
   ...sign_up_validation,
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
+    const isAdmin = req.body.admin_key === process.env.ADMIN_KEY;
 
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
@@ -46,6 +48,8 @@ const sign_up_post = [
       l_name: req.body.l_name.toLowerCase(),
       username: req.body.username.toLowerCase(),
       password: hashedPassword,
+      isMember: isAdmin,
+      isAdmin: isAdmin,
     });
 
     if (!errors.isEmpty()) {
