@@ -3,6 +3,7 @@ const path = require('path');
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcryptjs');
 const indexRouter = require('./routes/index');
 const signUpRouter = require('./routes/sign-up');
 const logInRouter = require('./routes/log-in');
@@ -26,14 +27,20 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
+bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+  // if err, do something
+  // otherwise, store hashedPassword in DB
+});
+
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
       const user = await User.findOne({ username: username.toLowerCase() });
+      const match = await bcrypt.compare(password, user.password);
       if (!user) {
         return done(null, false, { message: 'Incorrect username' });
       }
-      if (user.password !== password) {
+      if (!match) {
         return done(null, false, { message: 'Incorrect password' });
       }
       return done(null, user);
