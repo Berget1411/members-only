@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <%- include('./partials/nav.ejs') %>
+    <h1>Membership</h1>
+    <form action="" method="POST">
+      <input name="key" placeholder="Enter key " type="text" />
+      <button>Become member</button>
+    </form>
+    <% if (errors) { %>
+    <ul>
+      <% errors.forEach((err) => { %>
+      <li><%= err.msg %></li>
+      <% }) %>
+    </ul>
+    <% } %>
+  </body>
+</html>

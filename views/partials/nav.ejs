@@ -6,8 +6,10 @@
     <% if (!currentUser) { %>
     <a href="/sign-up">Sign up</a>
     <a href="/log-in">Log in</a>
+    <% } else if (!currentUser.isMember) { %>
+    <a href="/become-member">Become member</a>
+    <a href="/log-out">Log out</a>
     <% } else { %>
-    <a href="/post-message">Post message</a>
     <a href="/log-out">Log out</a>
     <% } %>
   </div>

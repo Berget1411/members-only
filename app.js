@@ -8,6 +8,7 @@ const indexRouter = require('./routes/index');
 const signUpRouter = require('./routes/sign-up');
 const logInRouter = require('./routes/log-in');
 const messageRouter = require('./routes/message');
+const memberRouter = require('./routes/member');
 const mongoose = require('mongoose');
 const User = require('./models/user');
 require('dotenv').config();
@@ -76,3 +77,4 @@ app.get('/log-out', (req, res, next) => {
   });
 });
 app.use('/create-message', messageRouter);
+app.use('/become-member', memberRouter);
