@@ -5,9 +5,24 @@
     <%- include('./partials/nav.ejs') %>
     <h1>Sign Up</h1>
     <form action="" method="POST">
-      <input name="f_name" placeholder="First Name" type="text" />
-      <input name="l_name" placeholder="Last Name" type="text" />
-      <input name="username" placeholder="Username" type="text" />
+      <input
+        name="f_name"
+        placeholder="First Name"
+        type="text"
+        value="<%= user.f_name %>"
+      />
+      <input
+        name="l_name"
+        placeholder="Last Name"
+        type="text"
+        value="<%= user.l_name%>"
+      />
+      <input
+        name="username"
+        placeholder="Username"
+        type="text"
+        value="<%= user.username%>"
+      />
       <input name="password" placeholder="Password" type="password" />
       <input
         name="re_password"
@@ -16,5 +31,12 @@
       />
       <button>Sign Up</button>
     </form>
+    <% if (errors) { %>
+    <ul>
+      <% errors.forEach((err) => { %>
+      <li><%= err.msg %></li>
+      <% }) %>
+    </ul>
+    <% } %>
   </body>
 </html>

@@ -27,11 +27,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
-bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
-  // if err, do something
-  // otherwise, store hashedPassword in DB
-});
-
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
