@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <%- include('./partials/nav.ejs') %>
+    <h1>Create a post</h1>
+    <form action="/create-message" method="POST">
+      <input
+        name="title"
+        placeholder="Enter a title"
+        type="text"
+        value="<%= message.title %>"
+      />
+      <input
+        name="description"
+        placeholder="Enter a description"
+        type="text"
+        value="<%= message.description %>"
+      />
+      <button>Submit</button>
+    </form>
+    <% if (errors) { %>
+    <ul>
+      <% errors.forEach((err) => { %>
+      <li><%= err.msg %></li>
+      <% }) %>
+    </ul>
+    <% } %>
+  </body>
+</html>

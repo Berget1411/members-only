@@ -40,7 +40,7 @@ const sign_up_post = [
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
 
-    const hashedPassword = await bcrypt.hash('req.body.password', 10);
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
       f_name: req.body.f_name.toLowerCase(),
       l_name: req.body.l_name.toLowerCase(),

@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs');
 const indexRouter = require('./routes/index');
 const signUpRouter = require('./routes/sign-up');
 const logInRouter = require('./routes/log-in');
+const messageRouter = require('./routes/message');
 const mongoose = require('mongoose');
 const User = require('./models/user');
 require('dotenv').config();
@@ -65,7 +66,6 @@ passport.deserializeUser(async (id, done) => {
 
 app.use(indexRouter);
 app.use('/sign-up', signUpRouter);
-
 app.use('/log-in', logInRouter);
 app.get('/log-out', (req, res, next) => {
   req.logout((err) => {
@@ -75,3 +75,4 @@ app.get('/log-out', (req, res, next) => {
     res.redirect('/');
   });
 });
+app.use('/create-message', messageRouter);

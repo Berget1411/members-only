@@ -23,6 +23,14 @@ const userSchema = new Schema({
     minLength: 6,
     required: true,
   },
+  isMember: {
+    type: Boolean,
+    default: () => false,
+  },
+  isAdmin: {
+    type: Boolean,
+    default: () => false,
+  },
 });
 
 module.exports = mongoose.model('users', userSchema);
