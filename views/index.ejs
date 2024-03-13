@@ -12,23 +12,46 @@
     <% } %>
 
     <section>
-      <% messages.forEach((message) => { %>
-      <h2><%= message.title %></h2>
-      <p><%= message.description %></p>
-      <div>
-        <% if (currentUser && (currentUser.isMember || currentUser.isAdmin)) {
-        %>
-        <p>(<%= message.author %>)</p>
-        <% } else { %>
-        <p>(author)</p>
-        <% } %> <% if (currentUser && (currentUser.isMember ||
-        currentUser.isAdmin)) { %>
-        <p>(<%= message.date %>)</p>
-        <% } else { %>
-        <p>(timestamp)</p>
-        <% } %>
-      </div>
-      <% }); %>
+      <% if (messages) { %>
+      <ul>
+        <% messages.forEach((message) => { %>
+        <li>
+          <h2><%= message.title %></h2>
+          <p><%= message.description %></p>
+          <div>
+            <% if (currentUser && currentUser.isMember ) { %>
+            <p><%= message.author %></p>
+            <p><%= message.date %></p>
+            <% } else { %>
+            <p>author</p>
+            <p>timestamp</p>
+            <% } %>
+          </div>
+          <% if (currentUser && currentUser.isAdmin) { %>
+          <a class="delete" data-doc="<%= message._id %>"
+            ><button>Delete</button></a
+          >
+          <% } %>
+        </li>
+        <% }); %>
+      </ul>
+      <% } else { %>
+      <p>There are no messages</p>
+      <% } %>
     </section>
+    <script>
+      const deleteButtons = document.querySelectorAll('.delete');
+      deleteButtons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+          const endpoint = `/create-message/${button.dataset.doc}`;
+          fetch(endpoint, {
+            method: 'DELETE',
+          })
+            .then((res) => res.json())
+            .then((data) => (window.location.href = data.redirect))
+            .catch((err) => console.log(err));
+        });
+      });
+    </script>
   </body>
 </html>

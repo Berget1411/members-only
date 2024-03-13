@@ -36,7 +36,15 @@ const message_post = [
   }),
 ];
 
+const message_delete = (req, res) => {
+  const id = req.params.id;
+  Message.findByIdAndDelete(id)
+    .then((result) => [res.json({ redirect: '/' })])
+    .catch((err) => console.log(err));
+};
+
 module.exports = {
   message_get,
   message_post,
+  message_delete,
 };
