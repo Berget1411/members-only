@@ -3,7 +3,7 @@
   <%- include('./partials/head.ejs') %>
   <body>
     <%- include('./partials/nav.ejs') %>
-    <h1>Create a post</h1>
+    <h1 class="page-title">Create a post</h1>
     <form action="/create-message" method="POST">
       <input
         name="title"
@@ -20,7 +20,7 @@
       <button>Submit</button>
     </form>
     <% if (errors) { %>
-    <ul>
+    <ul class="errors">
       <% errors.forEach((err) => { %>
       <li><%= err.msg %></li>
       <% }) %>

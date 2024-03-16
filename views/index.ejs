@@ -2,31 +2,40 @@
 <html lang="en">
   <%- include('./partials/head.ejs') %>
   <body>
-    <%- include('./partials/nav.ejs') %> <% if (currentUser) { %>
-    <h1>Welcome back <%= currentUser.username %></h1>
-    <p>Become a member to see who posted and when.</p>
-    <a href="/create-message">Create a post</a>
-    <% } else { %>
-    <h1>Messages</h1>
-    <p>Log in to post a message.</p>
-    <% } %>
+    <%- include('./partials/nav.ejs') %>
 
-    <section>
+    <section class="message-heading">
+      <% if (currentUser) { %>
+      <h1 class="page-title">
+        Welcome back <span><%= currentUser.username %></span>
+      </h1>
+      <p>Become a member to see who posted and when.</p>
+      <a class="create-message" href="/create-message">+ Create a Message</a>
+      <% } else { %>
+      <h1 class="page-title">Messages</h1>
+      <p>Log in to post a message.</p>
+      <% } %>
+    </section>
+
+    <section class="messages">
       <% if (messages) { %>
-      <ul>
+      <ul class="message-list">
         <% messages.forEach((message) => { %>
         <li>
-          <h2><%= message.title %></h2>
-          <p><%= message.description %></p>
-          <div>
-            <% if (currentUser && currentUser.isMember ) { %>
-            <p><%= message.author %></p>
-            <p><%= message.date %></p>
-            <% } else { %>
-            <p>author</p>
-            <p>timestamp</p>
-            <% } %>
+          <h2 class="message-title"><%= message.title %></h2>
+          <div class="message-info">
+            <p class="message-description"><%= message.description %></p>
+            <div class="right-info">
+              <% if (currentUser && currentUser.isMember ) { %>
+              <p><%= message.author %></p>
+              <p><%= message.date %></p>
+              <% } else { %>
+              <p>author</p>
+              <p>timestamp</p>
+              <% } %>
+            </div>
           </div>
+
           <% if (currentUser && currentUser.isAdmin) { %>
           <a class="delete" data-doc="<%= message._id %>"
             ><button>Delete</button></a
