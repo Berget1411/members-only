@@ -2,8 +2,13 @@ const Message = require('../models/message');
 const { body, validationResult } = require('express-validator');
 const asyncHandler = require('express-async-handler');
 
-const message_get = (req, res) =>
-  res.render('create-message', { errors: false, message: false });
+const message_get = (req, res) => {
+  if (req.body._id) {
+    res.render('create-message', { errors: false, message: false });
+  } else {
+    res.redirect('/');
+  }
+};
 
 const message_validation = [
   body('title', 'Title should be between 1 and 50 characters')
